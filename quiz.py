@@ -1,13 +1,11 @@
 import random
 import ollama
 
-# Global set to track asked questions
 asked_questions = set()
 
-# Function to fetch a trivia question
 def get_trivia_question():
-    global asked_questions  # Declare the global set
-    seed = random.randint(1000, 9999)  # Random seed to promote diversity
+    global asked_questions 
+    seed = random.randint(1000, 9999)
     prompt = (
         f"You are a trivia question generator. Generate a unique trivia question every time you are asked, "
         f"with seed {seed}. Format the response exactly like this:\n"
@@ -26,7 +24,7 @@ def get_trivia_question():
                 options = lines[1].replace("Options: ", "").strip()
                 answer = lines[2].replace("Answer: ", "").strip()
                 
-                # Avoid duplicate questions
+                
                 if question in asked_questions:
                     print("Duplicate detected. Regenerating...")
                     return get_trivia_question()
@@ -36,10 +34,10 @@ def get_trivia_question():
     except Exception as e:
         print(f"Error fetching question: {e}")
 
-    # Fallback static question
+   
     return "What is the capital of France?", "A) Paris B) Berlin C) Rome D) Madrid", "A"
 
-# Function to play the trivia game
+
 def play_trivia_game():
     print("Welcome to the Trivia Game!")
     print("Answer the questions by typing the letter corresponding to your choice (A, B, C, or D).\n")
@@ -64,7 +62,7 @@ def play_trivia_game():
     print(f"Game Over! Your final score is {score}/10.")
     print("Thanks for playing!")
 
-# Main function
+
 def main():
     while True:
         play_trivia_game()
